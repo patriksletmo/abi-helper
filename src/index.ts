@@ -4,6 +4,17 @@ import fetch from "node-fetch";
 
 prompt.start();
 
+function logIndented(message: string) {
+  const prefix = " ".repeat(2);
+  console.log(
+    prefix + message
+      .split("\n")
+      .map((line) => prefix + line)
+      .join("\n")
+      .trim()
+  );
+}
+
 async function main() {
   const { contractAddress } = await prompt.get(["contractAddress"]);
 
@@ -50,7 +61,7 @@ async function main() {
           continue;
         }
 
-        console.log(`  ${key}: ${JSON.stringify(value, null, 2)}`);
+        logIndented(`${key}: ${JSON.stringify(value, null, 2)}`);
       }
     }
   }
